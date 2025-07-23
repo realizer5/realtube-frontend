@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css1?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,5 +7,7 @@
     --color-papaya-whip: hsla(40, 91%, 91%, 1);
     --color-prussian-blue: hsla(201, 100%, 14%, 1);
     --color-air-superiority-blue: hsla(203, 39%, 57%, 1);
+
     --font-ubuntu: "Ubuntu", sans-serif;
+
 }
