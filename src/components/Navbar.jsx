@@ -1,12 +1,12 @@
 import { MonitorPlay, Search, X } from "lucide-react";
-import Button from "./Button";
+import { Button } from "./";
 
 export default function Navbar() {
     return (
-        <nav className="px-4 py-2 font-ubuntu flex justify-between">
+        <nav className="px-4 py-2 font-ubuntu flex justify-between sticky top-0 z-30 bg-white">
             <a href="" className="flex gap-1 text-barn-red items-center">
                 <MonitorPlay />
-                <h1 className="font-semibold">Realtube</h1>
+                <h1 className="font-semibold text-normal">Realtube</h1>
             </a>
             <div className="flex items-center w-100">
                 <div className="relative flex justify-end items-center w-full">
