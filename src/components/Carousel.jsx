@@ -27,7 +27,7 @@ export default function Carousel({ slides = [] }) {
                 }}>
                     {slides.map(item => (
                         <div className="w-screen" key={item}>
-                            <img src={item} alt="" />
+                            <img src={item} alt="" className="object-center object-cover" />
                         </div>
                     ))}
                 </div>

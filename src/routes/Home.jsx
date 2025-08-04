@@ -17,6 +17,11 @@ export default function Home() {
                         <VideoCard />
                         <VideoCard />
                         <VideoCard />
+                        <VideoCard />
+                        <VideoCard />
+                        <VideoCard />
+                        <VideoCard />
+                        <VideoCard />
                     </div>
                 </section>
             </main>

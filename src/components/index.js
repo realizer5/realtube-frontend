@@ -1,6 +1,6 @@
-import Navbar from "./Navbar";
 import Button from "./Button";
 import Carousel from "./Carousel";
 import VideoCard from "./VideoCard";
+import Header from "./Header";
 
-export { Navbar, Button, Carousel, VideoCard };
+export { Header, Button, Carousel, VideoCard };
