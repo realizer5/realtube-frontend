@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { memo, useEffect, useRef, useState } from "react"
 
-export default function Carousel({ slides = [] }) {
+const Carousel = memo(({ slides = [] }) => {
     const [slide, setSlide] = useState(0);
     const intervalRef = useRef(null);
     const slideLength = slides.length;
@@ -8,6 +8,7 @@ export default function Carousel({ slides = [] }) {
         setSlide(num);
     };
     const startCarousel = () => {
+        clearInterval(intervalRef.current);
         intervalRef.current = setInterval(() => {
             setSlide(prev => (prev === slideLength - 1 ? 0 : prev + 1));
         }, 3000)
@@ -25,8 +26,8 @@ export default function Carousel({ slides = [] }) {
                 <div className="flex h-full transition-transform duration-300" style={{
                     transform: `translateX(-${(slide / slideLength) * 100}%)`,
                 }}>
-                    {slides.map(item => (
-                        <div className="w-screen" key={item}>
+                    {slides.map((item, index) => (
+                        <div className="w-screen" key={index}>
                             <img src={item} alt="" className="object-center object-cover" />
                         </div>
                     ))}
@@ -36,9 +37,11 @@ export default function Carousel({ slides = [] }) {
                 {slides.map((item, index) => (
                     <button key={item} type="butoon" onClick={() => changeSlide(index)}
                         className={`rounded-full border border-prussian-blue size-4 cursor-pointer
-p-0.25 bg-clip-content ${slide === index && "bg-prussian-blue"}`}></button>
+                        p-0.25 bg-clip-content ${slide === index ? "bg-prussian-blue" : ""}`}></button>
                 ))}
             </div>
         </div >
     )
-}
+});
+
+export default Carousel;

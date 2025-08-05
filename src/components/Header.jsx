@@ -1,6 +1,7 @@
 import { Menu, MonitorPlay, Search, X } from "lucide-react";
 import { Button } from "./";
 import { useRef, useState } from "react";
+import { Link } from "react-router";
 
 const SearchForm = () => {
     const [search, setSearch] = useState("");
@@ -28,17 +29,17 @@ const SearchForm = () => {
     )
 }
 
-const Navbar = () => {
+const Navbar = ({ toggleSidebar }) => {
     return (
         <nav className="px-4 py-2 font-ubuntu flex justify-between bg-white">
             <div className="flex items-center gap-2">
-                <Button >
+                <Button onClick={toggleSidebar}>
                     <Menu />
                 </Button>
-                <a href="" className="flex gap-1 text-barn-red items-center">
+                <Link to="/" className="flex gap-1 text-barn-red items-center">
                     <MonitorPlay />
                     <h1 className="font-semibold text-normal">Realtube</h1>
-                </a>
+                </Link>
             </div>
             <SearchForm />
             <Button>Log In</Button>
@@ -46,18 +47,23 @@ const Navbar = () => {
     )
 }
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen }) => {
     return (
-        <aside className="bg-white min-h-screen fixed top-0 -z-10 w-40">
-        </aside>
+        <aside className={`bg-white min-h-screen fixed top-0 -z-10 w-40
+         ${isOpen ? "translate-x-0" : "-translate-x-40"} transition-transform duration-200`}>
+        </aside >
     )
 };
 
 const Header = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
     return (
         <header className="sticky z-30 top-0">
-            <Navbar />
-            <Sidebar />
+            <Navbar toggleSidebar={toggleSidebar} />
+            <Sidebar isOpen={isOpen} />
         </header>
     )
 };
