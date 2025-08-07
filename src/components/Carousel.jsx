@@ -1,6 +1,6 @@
-import { memo, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-const Carousel = memo(({ slides = [] }) => {
+const Carousel = ({ slides = [] }) => {
     const [slide, setSlide] = useState(0);
     const intervalRef = useRef(null);
     const slideLength = slides.length;
@@ -23,12 +23,12 @@ const Carousel = memo(({ slides = [] }) => {
         <div className="h-120 bg-gray-400 relative flex justify-center items-end overflow-hidden"
             onMouseEnter={() => clearInterval(intervalRef.current)} onMouseLeave={startCarousel}>
             <div className="size-full flex">
-                <div className="flex h-full transition-transform duration-300" style={{
+                <div className="flex h-full transition-transform duration-300 will-change-transform" style={{
                     transform: `translateX(-${(slide / slideLength) * 100}%)`,
                 }}>
                     {slides.map((item, index) => (
                         <div className="w-screen" key={index}>
-                            <img src={item} alt="" className="object-center object-cover" />
+                            <img src={item} alt="" className="object-center object-cover" loading="lazy" />
                         </div>
                     ))}
                 </div>
@@ -42,6 +42,6 @@ const Carousel = memo(({ slides = [] }) => {
             </div>
         </div >
     )
-});
+};
 
 export default Carousel;
