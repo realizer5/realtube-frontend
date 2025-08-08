@@ -34,7 +34,7 @@ const SearchForm = () => {
 
 const Navbar = ({ toggleSidebar, isOpen }) => {
     return (
-        <nav className="px-4 py-2 font-ubuntu flex justify-between bg-white">
+        <nav className="px-4 py-2 flex justify-between bg-white">
             <div className="flex items-center gap-2">
                 <button className="rounded-md px-4 py-2 font-bold cursor-pointer inline-block
                     active:scale-95 transition-colors duration-200 hover:bg-air-superiority-blue text-black"
@@ -47,9 +47,14 @@ const Navbar = ({ toggleSidebar, isOpen }) => {
                 </Link>
             </div>
             <SearchForm />
-            <Link to="/login">
-                <Button>Log In</Button>
-            </Link>
+            <div className="space-x-2">
+                <Link to="/upload">
+                    <Button>Create</Button>
+                </Link>
+                <Link to="/login">
+                    <Button>Log In</Button>
+                </Link>
+            </div>
         </nav >
     )
 };
@@ -61,21 +66,21 @@ const Sidebar = ({ isOpen }) => {
             <ul className="mt-16 py-2 ">
                 <li>
                     <NavLink to={"/"}
-                        className={`hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
+                        className={({ isActive }) => `${isActive ? "bg-air-superiority-blue" : ""} hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
                         <Home />
                         Home
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/"}
-                        className={`hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
+                    <NavLink to={"/subscriptions"}
+                        className={({ isActive }) => `${isActive ? "bg-air-superiority-blue" : ""} hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
                         <GalleryVerticalEnd />
                         Subscriptions
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/"}
-                        className={`hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
+                    <NavLink to={"/profile"}
+                        className={({ isActive }) => `${isActive ? "bg-air-superiority-blue" : ""} hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
                         <User />
                         Profile
                     </NavLink>

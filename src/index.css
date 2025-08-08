@@ -9,5 +9,8 @@
     --color-air-superiority-blue: hsla(203, 39%, 57%, 1);
 
     --font-ubuntu: "Ubuntu", sans-serif;
+}
 
+* {
+    font-family: "Ubuntu", sans-serif;
 }

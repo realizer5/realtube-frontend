@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 export default function VideoCard({ }) {
     return (
-        <div className="relative rounded-lg p-2 cursor-pointer hover:bg-air-superiority-blue duration-200">
+        <div className="relative rounded-xl p-2 cursor-pointer hover:bg-air-superiority-blue duration-200">
             <Link to="/abcd" className="absolute inset-0"></Link>
             <img src={`https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F5733895.jpg&f=1&nofb=1&ipt=8ceccbdfa80457c64ca9dd22673485e8a260ed0a5ac2648f4dacaaf1f55f6f03`}
                 alt="thumbnail" className="rounded-lg" />
