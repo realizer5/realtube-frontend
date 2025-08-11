@@ -9,6 +9,41 @@
     --color-air-superiority-blue: hsla(203, 39%, 57%, 1);
 
     --font-ubuntu: "Ubuntu", sans-serif;
+
+    --animate-speedline: speedline 3s linear 1;
+
+    @keyframes speedline {
+        0% {
+            transform: translateY(-0%);
+        }
+
+        100% {
+            transform: translateY(120%);
+        }
+    }
+
+    --animate-takeoff: takeoff 1s 1s forwards 1;
+
+    @keyframes takeoff {
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        60% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        70% {
+            transform: translateY(10%) scale(0.95);
+            opacity: 1;
+        }
+
+        100% {
+            transform: translateY(-200%) scale(1);
+        }
+    }
 }
 
 * {
