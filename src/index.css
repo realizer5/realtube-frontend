@@ -10,7 +10,7 @@
 
     --font-ubuntu: "Ubuntu", sans-serif;
 
-    --animate-speedline: speedline 3s linear 1;
+    --animate-speedline: speedline 2s 200ms linear 1;
 
     @keyframes speedline {
         0% {
@@ -22,28 +22,26 @@
         }
     }
 
-    --animate-takeoff: takeoff 1s 1s forwards 1;
+    --animate-takeoff: takeoff 1s forwards 1;
 
     @keyframes takeoff {
         0% {
             transform: translateY(0);
-            opacity: 1;
         }
 
-        60% {
-            transform: translateY(0) scale(1);
-            opacity: 1;
+        80% {
+            transform: translateY(0);
         }
 
-        70% {
-            transform: translateY(10%) scale(0.95);
-            opacity: 1;
+        90% {
+            transform: translateY(1rem) scale(0.5);
         }
 
         100% {
             transform: translateY(-200%) scale(1);
         }
     }
+
 }
 
 * {
