@@ -1,10 +1,12 @@
 import {
+    Bell,
     ChevronRight, GalleryVerticalEnd, History, Home, ListVideo, Menu, MonitorPlay, Search,
     SquarePlay, ThumbsUp, User, X
 } from "lucide-react";
 import { Button } from "./";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
+import useAuthStore from "../store/store";
 
 const SearchForm = () => {
     const [search, setSearch] = useState("");
@@ -32,7 +34,25 @@ const SearchForm = () => {
     )
 }
 
+const UserComponent = () => {
+    const avatar = useAuthStore(state => state.user.data.avatar);
+    return (
+        <button className="size-10 rounded-full cursor-pointer">
+            <img src={avatar} alt="avatar" className="rounded-full" />
+        </button>
+    )
+}
+
+
 const Navbar = ({ toggleSidebar, isOpen }) => {
+    const isAuthenticated = useAuthStore(state => state.isAuthenticated);
+    const bellRef = useRef(null);
+    const borderRipple = () => {
+        bellRef.current.classList.replace("border-transparent", "border-air-superiority-blue")
+        setTimeout(() => {
+            bellRef.current.classList.replace("border-air-superiority-blue", "border-transparent")
+        }, 150);
+    }
     return (
         <nav className="px-4 py-2 flex justify-between bg-white">
             <div className="flex items-center gap-2">
@@ -47,13 +67,21 @@ const Navbar = ({ toggleSidebar, isOpen }) => {
                 </Link>
             </div>
             <SearchForm />
-            <div className="space-x-2">
+            <div className="space-x-4 flex">
                 <Link to="/upload">
                     <Button>Create</Button>
                 </Link>
-                <Link to="/login">
-                    <Button>Log In</Button>
-                </Link>
+                {isAuthenticated ?
+                    <>
+                        <button className="cursor-pointer hover:bg-air-superiority-blue/50 border border-transparent
+                            active:bg-air-superiority-blue duration-200 p-2 rounded-full"
+                            onMouseUp={borderRipple} ref={bellRef}>
+                            <Bell /></button>
+                        <UserComponent />
+                    </> :
+                    <Link to="/login">
+                        <Button>Log In</Button>
+                    </Link>}
             </div>
         </nav >
     )

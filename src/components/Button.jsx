@@ -1,4 +1,4 @@
-export default function Button({ type = "button", children, onClick, }) {
+export default function Button({ type = "button", children, onClick }) {
     return (
         <button type={type} className={`rounded-md text-sm h-10 px-4 py-2 font-bold cursor-pointer inset-ring-2
         inline-block active:scale-95 transition-colors duration-200 bg-prussian-blue text-white

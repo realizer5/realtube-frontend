@@ -5,14 +5,19 @@ const UploadForm = ({ video }) => {
     const [thumbnail, setThumbnail] = useState(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
-        formData.append("video", video);
+        formData.append("videoFile", video);
         formData.append("thumbnail", thumbnail);
-        console.log(formData);
+        try {
+            const response = await fetch("/api/v1/videos/", { method: "POST", body: formData, });
+            console.log(response);
+        } catch (error) {
+            console.error("Error: ", error.message);
+        }
     }
     return (
         <>
@@ -30,7 +35,14 @@ const UploadForm = ({ video }) => {
                         className="border rounded text-sm py-1 px-2 cursor-pointer"
                         onChange={(e) => setThumbnail(e.target.files[0])} />
                 </div>
-                <Button type="submit">upload</Button>
+                <div className="space-x-4 ms-auto">
+                    <button type="reset" className={`rounded-md text-sm h-10 px-4 py-2 font-bold cursor-pointer inset-ring-2
+                        inline-block active:scale-95 transition-colors duration-200 bg-barn-red text-white
+                        inset-ring-fire-brick/30 hover:inset-ring-barn-red/30 hover:bg-fire-brick`}>
+                        Cancel
+                    </button>
+                    <Button type="submit">Upload</Button>
+                </div>
             </form>
         </>
     )

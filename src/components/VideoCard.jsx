@@ -1,25 +1,50 @@
 import { Clock8 } from "lucide-react";
 import { Link } from "react-router";
 
-export default function VideoCard({ }) {
+const timeAgo = (dateString) => {
+    const now = new Date();
+    const past = new Date(dateString);
+    const diffInSeconds = Math.floor((now - past) / 1000);
+
+    const units = [
+        { label: "year", seconds: 365 * 24 * 60 * 60 },
+        { label: "month", seconds: 30 * 24 * 60 * 60 },
+        { label: "day", seconds: 24 * 60 * 60 },
+        { label: "hour", seconds: 60 * 60 },
+        { label: "minute", seconds: 60 },
+        { label: "second", seconds: 1 }
+    ];
+
+    for (const unit of units) {
+        const amount = Math.floor(diffInSeconds / unit.seconds);
+        if (amount >= 1) {
+            return `${amount} ${unit.label}${amount > 1 ? "s" : ""} ago`;
+        }
+    }
+
+    return "just now";
+}
+
+export default function VideoCard({ video }) {
+
     return (
         <div className="relative rounded-xl p-2 cursor-pointer hover:bg-air-superiority-blue duration-200">
             <Link to="/abcd" className="absolute inset-0"></Link>
-            <img src={`https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpaperaccess.com%2Ffull%2F5733895.jpg&f=1&nofb=1&ipt=8ceccbdfa80457c64ca9dd22673485e8a260ed0a5ac2648f4dacaaf1f55f6f03`}
-                alt="thumbnail" className="rounded-lg" />
-            <div className="flex gap-2 mt-2">
-                <Link to="/hera" className="relative z-10">
-                    <img src={`https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.hdqwalls.com%2Fwallpapers%2Frick-and-morty-smith-adventures-4k-di.jpg&f=1&nofb=1&ipt=dc6a9961e9dd2ee09007aa2bb9ba6e1663ee528aed6ffb8eab5b673fee75d3d7`}
-                        alt="channel logo" className="rounded-full size-8" />
+            <img src={video.thumbnail}
+                alt="thumbnail" className="rounded-lg w-full aspect-video object-cover" />
+            <div className="flex gap-4 mt-2">
+                <Link to="/hera" className="relative z-10 h-fit">
+                    <img src={video.owner[0].avatar}
+                        alt="channel logo" className="rounded-full w-10 aspect-square object-cover" />
                 </Link>
                 <div>
-                    <h2 className="font-semibold">Realizer and rick and morty</h2>
-                    <Link to="/nise" className="text-sm relative z-10">realizer</Link>
+                    <h2 className="font-semibold">{video.title}</h2>
+                    <Link to="/nise" className="text-sm relative z-10">{video.owner[0].username}</Link>
                     <div className="text-sm flex items-center gap-4">
-                        <span className="">330K views</span>
+                        <span className="">{video.views} views</span>
                         <span className="inline-flex items-center">
                             <Clock8 className="inline w-[1em] h-[1em] mr-2" />
-                            3 months ago
+                            {timeAgo(video.createdAt)}
                         </span>
                     </div>
                 </div>
