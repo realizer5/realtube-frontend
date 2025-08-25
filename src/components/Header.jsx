@@ -4,7 +4,7 @@ import {
     SquarePlay, ThumbsUp, User, X
 } from "lucide-react";
 import { Button } from "./";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuthStore from "../store/store";
 

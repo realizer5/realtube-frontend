@@ -5,6 +5,7 @@ import NotFound from "./NotFound";
 import Login from "./Login";
 import Signup from "./Signup";
 import Upload from "./Upload";
+import Watch from "./Watch";
 
 export const router = createBrowserRouter([
     {
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
             { path: "login", Component: Login },
             { path: "signup", Component: Signup },
             { path: "upload", Component: Upload },
+            { path: "watch/:videoId", Component: Watch },
         ]
     },
     {

@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { Carousel, VideoCard } from "../components";
-import useAuthStore from "../store/store";
 
 export default function Home() {
-    const [slides, setSlides] = useState([]);
     const [videos, setVideos] = useState([]);
-    const isAuthorized = useAuthStore(state => state.isAuthorized);
+    const slides = videos.map(item => item.thumbnail);
     useEffect(() => {
         ; (async () => {
             const response = await fetch("/api/v1/videos", { method: "GET" });
             const result = await response.json();
-            console.log(result.data.docs)
-            setSlides([result.data.docs[0].thumbnail]);
             setVideos(result.data.docs);
         })();
     }, []);

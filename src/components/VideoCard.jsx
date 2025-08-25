@@ -29,7 +29,7 @@ export default function VideoCard({ video }) {
 
     return (
         <div className="relative rounded-xl p-2 cursor-pointer hover:bg-air-superiority-blue duration-200">
-            <Link to="/abcd" className="absolute inset-0"></Link>
+            <Link to={`/watch/${video._id}`} className="absolute inset-0"></Link>
             <img src={video.thumbnail}
                 alt="thumbnail" className="rounded-lg w-full aspect-video object-cover" />
             <div className="flex gap-4 mt-2">

@@ -28,7 +28,7 @@ const Carousel = ({ slides = [] }) => {
                 }}>
                     {slides.map((item, index) => (
                         <div className="w-screen" key={index}>
-                            <img src={item} alt="" className="object-center object-cover" loading="lazy" />
+                            <img src={item} alt="" className="w-full object-center object-cover" loading="lazy" />
                         </div>
                     ))}
                 </div>
