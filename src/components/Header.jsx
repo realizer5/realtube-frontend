@@ -106,13 +106,6 @@ const Sidebar = ({ isOpen }) => {
                         Subscriptions
                     </NavLink>
                 </li>
-                <li>
-                    <NavLink to={"/profile"}
-                        className={({ isActive }) => `${isActive ? "bg-air-superiority-blue" : ""} hover:bg-air-superiority-blue px-4 py-2 rounded-lg flex items-center gap-4`}>
-                        <User />
-                        Profile
-                    </NavLink>
-                </li>
             </ul>
             <ul className="border-t bordert-t-gray-500 py-2">
                 <li>
