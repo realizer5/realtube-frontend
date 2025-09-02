@@ -1,17 +1,13 @@
-import { useParams } from "react-router"
+import { data, useLoaderData, } from "react-router"
 import { Button, VideoPlayer } from "../components";
-import useFetch from "../hooks/useFetch";
+import { useRef } from "react";
 
 export default function Watch() {
-    const { videoId } = useParams();
-    const { data, error, loading } = useFetch(`/api/v1/videos/${videoId}`);
-    if (loading) return (
-        <>
-            loading...
-        </>
-    );
-    const { videoFile, title, owner } = data.data;
+    const video = useLoaderData();
+    console.log(video);
+    const { videoFile, title, owner } = video.data;
     const { avatar, username } = owner;
+
     return (
         <div>
             <VideoPlayer videoLink={videoFile} />
@@ -25,3 +21,9 @@ export default function Watch() {
     )
 }
 
+export const loadVideos = async ({ request, params }) => {
+    const res = await fetch(`/api/v1/videos/${params.videoId}`,
+        { method: "GET", signal: request.signal });
+    if (!res.ok) throw data("Record Not Found", { status: res.status, statusText: res.statusText });
+    return await res.json();
+}

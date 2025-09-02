@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Button } from "../components";
+import { useNavigate } from "react-router";
 
 export default function Signup() {
     const [fullName, setFullName] = useState("");
@@ -7,6 +8,7 @@ export default function Signup() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [avatar, setAvatar] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -20,6 +22,7 @@ export default function Signup() {
         try {
             const response = await fetch("/api/v1/users/register", { method: "POST", body: formData, });
             console.log(response);
+            navigate("/");
         } catch (error) {
             console.error("Error: ", error.message);
         }

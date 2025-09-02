@@ -1,43 +1,32 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const useFetch = (url, options = { method: "GET" }) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [data, setData] = useState(null);
+    const abortControllerRef = useRef(null);
 
     useEffect(() => {
-        if (!url) return;
-
-        const controller = new AbortController();
-        const signal = controller.signal;
-
-        const fetchData = async () => {
+        (async () => {
+            abortControllerRef.current?.abort();
+            abortControllerRef.current = new AbortController();
             setLoading(true);
-            setError(null);
-
             try {
-                const response = await fetch(url, { ...options, signal });
-
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status} ${response.statusText}`);
+                const response = await fetch(url, { ...options, signal: abortControllerRef.current?.signal })
+                if (!response.ok) throw new Error(`Failed to fetch data: ${response.statusText}`);
+                const data = await response.json();
+                setData(data);
+            } catch (error) {
+                if (!error.name === "AbortError") {
+                    setError(error);
                 }
-
-                const json = await response.json();
-                setData(json);
+            } finally {
                 setLoading(false);
-            } catch (err) {
-                if (err.name !== 'AbortError') {
-                    setError(err.message || 'Something went wrong');
-                }
             }
-        };
-
-        fetchData();
-
-        return () => controller.abort();
+        })();
     }, [url]);
 
-    return { data, error, loading };
+    return { loading, error, data };
 }
 
 export default useFetch;

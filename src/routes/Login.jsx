@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "../components";
+import { useNavigate } from "react-router";
 
 export default function Login() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,6 +19,7 @@ export default function Login() {
                 body: formData,
             });
             console.log(response);
+            navigate("/");
         } catch (error) {
             console.error("Error: ", error.message);
         }
