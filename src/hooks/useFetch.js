@@ -10,19 +10,16 @@ const useFetch = (url, options = { method: "GET" }) => {
         (async () => {
             abortControllerRef.current?.abort();
             abortControllerRef.current = new AbortController();
-            setLoading(true);
             try {
+                setLoading(true);
                 const response = await fetch(url, { ...options, signal: abortControllerRef.current?.signal })
                 if (!response.ok) throw new Error(`Failed to fetch data: ${response.statusText}`);
                 const data = await response.json();
-                setData(data);
+                setData(data.data);
             } catch (error) {
-                if (!error.name === "AbortError") {
-                    setError(error);
-                }
-            } finally {
-                setLoading(false);
+                setError(error);
             }
+            setLoading(false);
         })();
     }, [url]);
 

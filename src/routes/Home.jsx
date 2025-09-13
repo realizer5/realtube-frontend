@@ -1,23 +1,18 @@
-import { useEffect, useState } from "react";
 import { Carousel, VideoCard } from "../components";
+import useFetch from "../hooks/useFetch";
 
 export default function Home() {
-    const [videos, setVideos] = useState([]);
-    const slides = videos.map(item => item.thumbnail);
-    useEffect(() => {
-        ; (async () => {
-            const response = await fetch("/api/v1/videos", { method: "GET" });
-            const result = await response.json();
-            setVideos(result.data.docs);
-        })();
-    }, []);
+    const { loading, error, data } = useFetch("/api/v1/videos");
+    if (error) return <div>error</div>
+    if (loading) return <div>loading... </div>
+    const slides = data.docs.map(item => item.thumbnail);
     return (
         <>
             <Carousel slides={slides} />
             <main>
                 <section className="p-2">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                        {videos.map((item, index) => (
+                        {data.docs.map((item, index) => (
                             <VideoCard key={index} video={item} />
                         ))}
                     </div>
@@ -26,4 +21,3 @@ export default function Home() {
         </>
     )
 }
-

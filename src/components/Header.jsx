@@ -4,7 +4,7 @@ import {
     SquarePlay, ThumbsUp, User, X
 } from "lucide-react";
 import { Button } from "./";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import useAuthStore from "../store/store";
 
@@ -35,7 +35,7 @@ const SearchForm = () => {
 }
 
 const UserComponent = () => {
-    const avatar = useAuthStore(state => state.user.data.avatar);
+    const avatar = useAuthStore(state => state.user.avatar);
     return (
         <button className="size-10 rounded-full cursor-pointer">
             <img src={avatar} alt="avatar" className="rounded-full" />
@@ -67,12 +67,12 @@ const Navbar = ({ toggleSidebar, isOpen }) => {
                 </Link>
             </div>
             <SearchForm />
-            <div className="space-x-4 flex">
-                <Link to="/upload">
-                    <Button>Create</Button>
-                </Link>
+            <div className="space-x-4 flex items-center">
                 {isAuthenticated ?
                     <>
+                        <Link to="/upload">
+                            <Button>Create</Button>
+                        </Link>
                         <button className="cursor-pointer hover:bg-air-superiority-blue/50 border border-transparent
                             active:bg-air-superiority-blue duration-200 p-2 rounded-full"
                             onMouseUp={borderRipple} ref={bellRef}>

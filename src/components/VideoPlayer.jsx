@@ -166,6 +166,7 @@ export default function VideoPlayer({ videoLink }) {
         const limit = currentRate + rate <= 2 && currentRate + rate >= 0.25;
         if (limit) {
             video.playbackRate = currentRate + rate;
+            setPlaybackRate(video.playbackRate);
         }
     };
     const handleWheel = (e) => {

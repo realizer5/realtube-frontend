@@ -1,6 +1,5 @@
 import { data, useLoaderData, } from "react-router"
 import { Button, VideoPlayer } from "../components";
-import { useRef } from "react";
 
 export default function Watch() {
     const video = useLoaderData();
@@ -21,7 +20,7 @@ export default function Watch() {
     )
 }
 
-export const loadVideos = async ({ request, params }) => {
+export const loadVideo = async ({ request, params }) => {
     const res = await fetch(`/api/v1/videos/${params.videoId}`,
         { method: "GET", signal: request.signal });
     if (!res.ok) throw data("Record Not Found", { status: res.status, statusText: res.statusText });
