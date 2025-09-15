@@ -12,13 +12,13 @@ function App() {
     if (loading) return <div> loading... </div>
     if (data) {
         login(data);
-        return (
-            <>
-                <Header />
-                <Outlet />
-            </>
-        )
     }
+    return (
+        <>
+            <Header />
+            <Outlet />
+        </>
+    )
 }
 
 export default App

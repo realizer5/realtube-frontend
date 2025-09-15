@@ -181,8 +181,8 @@ export default function VideoPlayer({ videoLink }) {
     return (
         <div ref={containerRef} className="relative bg-black max-w-6xl mx-auto"
             onKeyDown={videoKeyboardControls} >
-            <video autoPlay ref={videoRef} onClick={togglePlay} onDoubleClick={toggleFullscreen} className="w-full"
-                src={videoLink} tabIndex={-1}>
+            <video autoPlay ref={videoRef} onClick={togglePlay} onDoubleClick={toggleFullscreen}
+                className={`w-full ${fullScreen ? "h-full" : "max-h-[80vh]"}`} src={videoLink} tabIndex={-1}>
                 Your browser does not support the video tag.
             </video>
             <div className="px-4 absolute bottom-0 inset-x-0">

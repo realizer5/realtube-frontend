@@ -1,11 +1,11 @@
 import {
     Bell,
     ChevronRight, GalleryVerticalEnd, History, Home, ListVideo, Menu, MonitorPlay, Search,
-    SquarePlay, ThumbsUp, User, X
+    SquarePlay, ThumbsUp, X
 } from "lucide-react";
 import { Button } from "./";
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import useAuthStore from "../store/store";
 
 const SearchForm = () => {
@@ -153,11 +153,18 @@ const Header = () => {
     const toggleSidebar = () => {
         setIsOpen(!isOpen);
     };
+    const location = useLocation();
+    useEffect(() => { setIsOpen(false) }, [location]);
     return (
-        <header className="sticky z-30 top-0">
-            <Navbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
-            <Sidebar isOpen={isOpen} />
-        </header>
+        <>
+            <header className="sticky z-30 top-0">
+                <Navbar toggleSidebar={toggleSidebar} isOpen={isOpen} />
+                <Sidebar isOpen={isOpen} />
+            </header>
+            {isOpen &&
+                <div className="absolute inset-0 bg-black/50 z-10" onClick={toggleSidebar}></div>
+            }
+        </>
     )
 };
 
